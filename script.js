@@ -107,30 +107,47 @@ function playRound()
 function playGame()
 {
     let rounds = 0;
-    while (rounds<5)
-    {
-        playRound();
-        rounds++;
-        if (humanScore > ((5-rounds)+computerScore) || computerScore > ((5-rounds)+humanScore))   //if the computer's current score is greater than the maximum score the user could get with the remain rounds left (or vice versa) then the game ends
-        {
-            break;
-        }
-    }
-    if (humanScore > computerScore)
-    {
-            console.log(`You win! ${humanScore}-${computerScore}`);
-    }
-    else if (computerScore > humanScore)
-    {
-            console.log(`You lost! ${computerScore}-${humanScore}`);
-    }
-    else
-    {
-        console.log(`Tie game ${humanScore}-${computerScore}`);
-    }
+    // while (rounds<5)
+    // {
+    //     playRound();
+    //     rounds++;
+    //     if (humanScore > ((5-rounds)+computerScore) || computerScore > ((5-rounds)+humanScore))   //if the computer's current score is greater than the maximum score the user could get with the remain rounds left (or vice versa) then the game ends
+    //     {
+    //         break;
+    //     }
+    // }
+    // if (humanScore > computerScore)
+    // {
+    //         console.log(`You win! ${humanScore}-${computerScore}`);
+    // }
+    // else if (computerScore > humanScore)
+    // {
+    //         console.log(`You lost! ${computerScore}-${humanScore}`);
+    // }
+    // else
+    // {
+    //     console.log(`Tie game ${humanScore}-${computerScore}`);
+    // }
 }
-
+console.log("a");
 humanScore = 0;
 computerScore = 0;
 console.log("Let's play rock, paper, scissors! 5 rounds")
+
+buttons = document.querySelector("#buttons");
+buttons.addEventListener("click", (e)=>{
+    if (e.target.id == "rock")
+    {
+        console.log("rock");
+    }
+    else if (e.target.id == "paper")
+    {
+        console.log("paper");
+    }
+    else
+    {
+        console.log("scissors");
+    }
+});
+
 playGame();
