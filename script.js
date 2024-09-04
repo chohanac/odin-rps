@@ -47,66 +47,74 @@ function getHumanChoice()
 
 }
 
-function playRound()
+function playRound(user)
 {
+    if (fin) return;
     let computer = getComputerChoice();
-    let user = getHumanChoice();
+    // let user = getHumanChoice;
     if (user == "r")
     {
         if (computer == "p")
         {
-            console.log("You lost. Paper beats rock.");
+            win.textContent = ("You lost. Paper beats rock.");
             computerScore++;
         }
         else if (computer == "s")
         {
-            console.log("You win. Rock beats scissors");
+            win.textContent = ("You win. Rock beats scissors");
             humanScore++;
         }
         else 
         {
-            console.log("Tie. You both selected rock.");
+            win.textContent = ("Tie. You both selected rock.");
         }
     }
     else if (user == "p")
     {
         if (computer == "r")
             {
-                console.log("You win. Paper beats rock.");
+                win.textContent = ("You win. Paper beats rock.");
                 humanScore++;
             }
         else if (computer == "s")
             {
-                console.log("You lost. Scissors beats paper");
+                win.textContent = ("You lost. Scissors beats paper");
                 computerScore++;
             }
         else 
             {
-                console.log("Tie. You both selected paper.");
+                win.textContent = ("Tie. You both selected paper.");
             }
     }
     else
     {
         if (computer == "p")
         {
-            console.log("You win. Scissors beats paper.");
+            win.textContent = ("You win. Scissors beats paper.");
             humanScore++;
         }
         else if (computer == "r")
         {
-            console.log("You lost. rock beats scissors");
+            win.textContent = ("You lost. rock beats scissors");
             computerScore++;
         }
         else 
         {
-            console.log("Tie. You both selected scissors.");
+            win.textContent = ("Tie. You both selected scissors.");
         }
     }
+    score.textContent = `User: ${humanScore} Computer: ${computerScore}`;
+    rounds++;
+    if (rounds >= 5)
+    {
+        fin = true;
+        playGame();
+    }
+
 }
 
 function playGame()
 {
-    let rounds = 0;
     // while (rounds<5)
     // {
     //     playRound();
@@ -116,37 +124,42 @@ function playGame()
     //         break;
     //     }
     // }
-    // if (humanScore > computerScore)
-    // {
-    //         console.log(`You win! ${humanScore}-${computerScore}`);
-    // }
-    // else if (computerScore > humanScore)
-    // {
-    //         console.log(`You lost! ${computerScore}-${humanScore}`);
-    // }
-    // else
-    // {
-    //     console.log(`Tie game ${humanScore}-${computerScore}`);
-    // }
-}
-console.log("a");
-humanScore = 0;
-computerScore = 0;
-console.log("Let's play rock, paper, scissors! 5 rounds")
-
-buttons = document.querySelector("#buttons");
-buttons.addEventListener("click", (e)=>{
-    if (e.target.id == "rock")
+    if (humanScore > computerScore)
     {
-        console.log("rock");
+            final.textContent = (`You win! ${humanScore}-${computerScore}`);
     }
-    else if (e.target.id == "paper")
+    else if (computerScore > humanScore)
     {
-        console.log("paper");
+            final.textContent = (`You lost! ${computerScore}-${humanScore}`);
     }
     else
     {
-        console.log("scissors");
+        final.textContent = (`Tie game ${humanScore}-${computerScore}`);
+    }
+}
+let fin = false; 
+let rounds = 0;
+humanScore = 0;
+computerScore = 0;
+buttons = document.querySelector("#buttons");
+const body = document.querySelector("body");
+const scoreText = document.querySelector("#scoreText");
+const score = document.querySelector("#score");
+const final = document.querySelector("#final");
+let win = document.createElement("p");
+body.insertBefore(win, score);
+buttons.addEventListener("click", (e)=>{
+    if (e.target.id == "rock")
+    {
+        playRound("r");
+    }
+    else if (e.target.id == "paper")
+    {
+        playRound("p");
+    }
+    else
+    {
+        playRound("s");
     }
 });
 
